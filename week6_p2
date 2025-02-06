@@ -1,0 +1,79 @@
+import java.util.Scanner;
+
+public class p2 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the number of employees: ");
+        int n = sc.nextInt();
+        EMPLOYEE e[] = new EMPLOYEE[n];
+        for (int i = 0; i < n; i++) {
+            e[i] = new EMPLOYEE();
+            e[i].read();
+        }
+        for (int i = 0; i < n; i++) {
+            e[i].display();
+            e[i].compute_net_sal();
+        }
+        sc.close();
+    }
+}
+
+class EMPLOYEE {
+    String Ename;
+    int Eid;
+    float Basic, DA, Gross_Sal, Net_Sal;
+    String email;
+
+    void read() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the name of the employee: ");
+        Ename = sc.nextLine();
+        Ename = formatEmployeeName(Ename);
+        email = generateEmail(Ename);
+        System.out.println("Enter the ID of the employee: ");
+        Eid = sc.nextInt();
+        System.out.println("Enter the basic salary of the employee: ");
+        Basic = sc.nextFloat();
+    }
+
+    void display() {
+        System.out.println("Name: " + Ename);
+        System.out.println("Email: " + email);
+        System.out.println("ID: " + Eid);
+        System.out.println("Basic Salary: " + Basic);
+    }
+
+    void compute_net_sal() {
+        DA = (float) (0.52 * Basic);
+        Gross_Sal = Basic + DA;
+        Net_Sal = Gross_Sal - (float) (0.3 * Gross_Sal);
+        System.out.println("DA: " + DA);
+        System.out.println("Gross Salary: " + Gross_Sal);
+        System.out.println("Net Salary: " + Net_Sal);
+    }
+
+    // Method to format the employee's name
+    String formatEmployeeName(String name) {
+        String[] words = name.split(" ");
+        StringBuilder formattedName = new StringBuilder();
+        for (String word : words) {
+            if (word.length() > 0) {
+                formattedName.append(Character.toUpperCase(word.charAt(0)))
+                             .append(word.substring(1).toLowerCase())
+                             .append(" ");
+            }
+        }
+        return formattedName.toString().trim();
+    }
+
+    // Method to generate an email address for the employee
+    String generateEmail(String name) {
+        String[] words = name.split(" ");
+        StringBuilder email = new StringBuilder();
+        email.append(words[0].charAt(0)); // First initial
+        email.append(words[words.length - 1]); // Last name
+        email.append("@example.com");
+        return email.toString().toLowerCase();
+    }
+}
