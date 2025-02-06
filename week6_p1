@@ -1,0 +1,80 @@
+//1. Write a menu driven program to do the following 
+//i. 
+//To check whether a string is palindrome or not 
+//ii. Write the string in an alphabetical order 
+//iii. Reverse the string 
+//iv. Concatenate the original string and the reversed string
+import java.util.Scanner;
+public class p1 {
+
+	public static void main(String[] args) {
+		int choice;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("enter choice");
+		choice=sc.nextInt();
+		System.out.println("enter the string");
+		String str=sc.next();
+		switch(choice) {
+		case 0:
+		{String rev="";
+		for (int i=str.length()-1;i>=0;i--)
+		{rev+=str.charAt(i);
+		}
+		System.out.println(rev);
+		if (rev.compareTo(str)==0)
+		{System.out.println("palindrome");
+		}
+		else
+		{System.out.println("not a palindrome");
+		}
+		break;}
+		case 1:{
+	char[] chars = str.toCharArray();
+	        
+	        // Bubble Sort Algorithm
+	        for (int i = 0; i < chars.length - 1; i++) {
+	            for (int j = 0; j < chars.length - 1 - i; j++) {
+	                if (chars[j] > chars[j + 1]) {
+	                    // Swap chars[j] and chars[j + 1]
+	                    char temp = chars[j];
+	                    chars[j] = chars[j + 1];
+	                    chars[j + 1] = temp;
+	                }
+	            }
+	        }
+	        
+	        String sortedString = new String(chars);
+	        System.out.println("Sorted string: " + sortedString);
+	        break;
+		}
+		
+		case 2:
+		{
+			String rev="";
+			System.out.println("the reversed string is ");
+		
+		for (int i=str.length()-1;i>=0;i--)
+		{rev+=str.charAt(i);
+		}
+		System.out.println(rev);
+		break;
+		}
+		case 3:
+		{String rev="";
+		System.out.println("after concatenation ");
+		
+		for (int i=str.length()-1;i>=0;i--)
+		{rev+=str.charAt(i);
+		}
+		System.out.println(str+rev);
+		break;
+		}
+		default:
+			System.out.println("error");
+			
+		
+		
+	}
+
+}
+}
