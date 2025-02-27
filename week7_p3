@@ -1,0 +1,106 @@
+package week_7;
+//Base class Building
+class Building {
+ protected double squareFootage;
+ protected int stories;
+
+ // Default constructor
+ public Building() {
+     this.squareFootage = 0.0;
+     this.stories = 0;
+ }
+
+ // Overloaded constructor
+ public Building(double squareFootage, int stories) {
+     this.squareFootage = squareFootage;
+     this.stories = stories;
+ }
+
+ // Method to display details of the building
+ public void displayDetails() {
+     System.out.println("Building Details:");
+     System.out.println("Square Footage: " + squareFootage);
+     System.out.println("Number of Stories: " + stories);
+ }
+}
+
+//Subclass House extends Building
+class House extends Building {
+ private int bedrooms;
+ private int baths;
+
+ // Default constructor
+ public House() {
+     super();
+     this.bedrooms = 0;
+     this.baths = 0;
+ }
+
+ // Overloaded constructor
+ public House(double squareFootage, int stories, int bedrooms, int baths) {
+     super(squareFootage, stories);
+     this.bedrooms = bedrooms;
+     this.baths = baths;
+ }
+
+ // Method to display details of the house
+ @Override
+ public void displayDetails() {
+     super.displayDetails();
+     System.out.println("House Details:");
+     System.out.println("Bedrooms: " + bedrooms);
+     System.out.println("Bathrooms: " + baths);
+ }
+}
+
+//Subclass School extends Building
+class School extends Building {
+ private int classrooms;
+ private String gradeLevel;
+
+ // Default constructor
+ public School() {
+     super();
+     this.classrooms = 0;
+     this.gradeLevel = "Unknown";
+ }
+
+ // Overloaded constructor
+ public School(double squareFootage, int stories, int classrooms, String gradeLevel) {
+     super(squareFootage, stories);
+     this.classrooms = classrooms;
+     this.gradeLevel = gradeLevel;
+ }
+
+ // Method to display details of the school
+ @Override
+ public void displayDetails() {
+     super.displayDetails();
+     System.out.println("School Details:");
+     System.out.println("Classrooms: " + classrooms);
+     System.out.println("Grade Level: " + gradeLevel);
+ }
+}
+
+//Main class to demonstrate the working of the hierarchy
+public class program3 {
+ public static void main(String[] args) {
+     // Creating an object of House class
+     House house1 = new House(2500.5, 2, 4, 3);
+     System.out.println("Details of the House:");
+     house1.displayDetails();
+     System.out.println();
+
+     // Creating an object of School class
+     School school1 = new School(50000.0, 3, 20, "Elementary");
+     System.out.println("Details of the School:");
+     school1.displayDetails();
+     System.out.println();
+     
+     // Creating an object of Building class
+     Building building1 = new Building(10000.0, 5);
+     System.out.println("Details of the Building:");
+     building1.displayDetails();
+ }
+}
+
