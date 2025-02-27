@@ -1,0 +1,158 @@
+package week_7;
+import java.util.Scanner;
+
+//Base class Account
+class Account {
+ protected String customerName;
+ protected int accNo;
+ protected double balance;
+ protected String accountType;
+
+ // Constructor to initialize Account details
+ public Account(String customerName, int accNo, String accountType) {
+     this.customerName = customerName;
+     this.accNo = accNo;
+     this.balance = 0.0; // Initial balance is 0
+     this.accountType = accountType;
+ }
+
+ // Accept deposit and update balance
+ public void deposit(double amount) {
+     if (amount > 0) {
+         balance += amount;
+         System.out.println("Deposited: " + amount);
+     } else {
+         System.out.println("Invalid deposit amount.");
+     }
+ }
+
+ // Display balance
+ public void displayBalance() {
+     System.out.println("Balance: " + balance);
+ }
+
+ // Withdraw amount and update balance
+ public void withdraw(double amount) {
+     if (amount > 0 && balance >= amount) {
+         balance -= amount;
+         System.out.println("Withdrawn: " + amount);
+     } else {
+         System.out.println("Insufficient balance or invalid withdrawal amount.");
+     }
+ }
+
+ // Check if minimum balance is maintained (to be implemented in subclasses)
+ public void checkMinimumBalance() {
+     // This method will be implemented in subclasses
+ }
+
+ // Display account details
+ public void displayAccountDetails() {
+     System.out.println("Customer Name: " + customerName);
+     System.out.println("Account No: " + accNo);
+     System.out.println("Account Type: " + accountType);
+     displayBalance();
+ }
+}
+
+//Subclass SavingsAccount extends Account
+class SavingsAccount extends Account {
+ private static final double INTEREST_RATE = 0.04; // 4% interest rate
+
+ // Constructor
+ public SavingsAccount(String customerName, int accNo) {
+     super(customerName, accNo, "Savings");
+ }
+
+ // Compute and deposit interest into the account
+ public void computeAndDepositInterest() {
+     double interest = balance * INTEREST_RATE;
+     balance += interest;
+     System.out.println("Interest deposited: " + interest);
+ }
+
+ // Withdraw amount with interest computation
+ @Override
+ public void withdraw(double amount) {
+     super.withdraw(amount);
+ }
+
+ // Check if minimum balance is maintained (no penalty required)
+ @Override
+ public void checkMinimumBalance() {
+     // Savings accounts don't have strict minimum balance requirements
+     System.out.println("Minimum balance check not required for savings accounts.");
+ }
+}
+
+//Subclass CurrentAccount extends Account
+class CurrentAccount extends Account {
+ private static final double MIN_BALANCE = 1000.0; // Minimum balance required
+ private static final double SERVICE_TAX = 50.0; // Service tax to impose if balance goes below minimum
+
+ // Constructor
+ public CurrentAccount(String customerName, int accNo) {
+     super(customerName, accNo, "Current");
+ }
+
+ // Withdraw amount and impose service tax if balance falls below minimum
+ @Override
+ public void withdraw(double amount) {
+     if (amount > 0 && balance >= amount) {
+         balance -= amount;
+         System.out.println("Withdrawn: " + amount);
+     } else {
+         System.out.println("Insufficient balance or invalid withdrawal amount.");
+     }
+ }
+
+ // Check for minimum balance and impose service tax if necessary
+ @Override
+ public void checkMinimumBalance() {
+     if (balance < MIN_BALANCE) {
+         balance -= SERVICE_TAX;
+         System.out.println("Balance is below minimum. Service tax of " + SERVICE_TAX + " imposed.");
+     }
+ }
+}
+
+//Main class to demonstrate the functionality
+public class program4 {
+ public static void main(String[] args) {
+     Scanner sc = new Scanner(System.in);
+
+     // Creating instances of SavingsAccount and CurrentAccount
+     System.out.println("Enter details for Savings Account:");
+     System.out.print("Enter customer name: ");
+     String name = sc.nextLine();
+     System.out.print("Enter account number: ");
+     int accNo = sc.nextInt();
+     SavingsAccount savingsAccount = new SavingsAccount(name, accNo);
+
+     System.out.println("Enter details for Current Account:");
+     System.out.print("Enter customer name: ");
+     sc.nextLine(); // Consume newline
+     name = sc.nextLine();
+     System.out.print("Enter account number: ");
+     accNo = sc.nextInt();
+     CurrentAccount currentAccount = new CurrentAccount(name, accNo);
+
+     // Performing operations on Savings Account
+     savingsAccount.deposit(5000);
+     savingsAccount.computeAndDepositInterest();
+     savingsAccount.displayAccountDetails();
+     savingsAccount.withdraw(1000);
+     savingsAccount.displayAccountDetails();
+
+     System.out.println("\nPerforming operations on Current Account:");
+     // Performing operations on Current Account
+     currentAccount.deposit(2000);
+     currentAccount.withdraw(1500);
+     currentAccount.checkMinimumBalance(); // Check for minimum balance
+     currentAccount.displayAccountDetails();
+
+     sc.close();
+ }
+}
+
+
