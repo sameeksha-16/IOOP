@@ -1,0 +1,157 @@
+package week_7;
+import java.util.Arrays;
+import java.util.Scanner;
+
+class STUDENT {
+    String sname;
+    int[] marks_array;
+    int total;
+    float avg;
+    int n;
+
+    void assign() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the name of the student: ");
+        sname = sc.nextLine();
+        
+        System.out.println("Enter number of subjects: ");
+        n = sc.nextInt();
+        marks_array = new int[n];
+        
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter the marks of subject " + (i + 1) + ": ");
+            marks_array[i] = sc.nextInt();
+        }
+    }
+
+    void compute() {
+        total = 0;
+        for (int i = 0; i < n; i++) {
+            total += marks_array[i];
+        }
+        avg = (float) total / n;
+    }
+
+    void display() {
+        System.out.println("Name: " + sname);
+        System.out.print("Marks: ");
+        for (int i = 0; i < n; i++) {
+            System.out.print(marks_array[i] + " ");
+        }
+        System.out.println("\nTotal: " + total);
+        System.out.println("Average: " + avg);
+    }String extractInitials() {
+        String[] words = sname.split(" ");
+        StringBuilder initials = new StringBuilder();
+        for (String word : words) {
+            if (word.length() > 0) {
+                initials.append(Character.toUpperCase(word.charAt(0)));
+            }
+        }
+        return initials.toString();
+    }
+
+    String removeWhitespace() {
+        return sname.replaceAll("\\s", "");
+    }}
+class ScienceStudent extends STUDENT{
+	private int practicalmarks;
+	void displaypracticalmarks()
+		{System.out.println("practical marks :"+practicalmarks);
+		}
+	void assign() {
+	super.assign();
+	Scanner sc=new Scanner(System.in);
+	System.out.println("enter practical marks");
+	practicalmarks=sc.nextInt();
+	}
+	void compute()
+	{super.compute();
+	total+=practicalmarks;
+	avg=(float)total/(n+1);
+	}
+	void display()
+	{super.display();
+	displaypracticalmarks();
+	}}
+class ArtsStudent extends STUDENT{
+	private int submarks;
+	private String electivesub;
+	void displaypracticalmarks()
+		{System.out.println("electivesubject marks:"+electivesub);
+		System.out.println("Elective subject marks :"+submarks);
+		}
+	void assign() {
+	super.assign();
+	Scanner sc=new Scanner(System.in);
+	System.out.println("enter electivesubject:");
+	electivesub=sc.nextLine();
+	System.out.println("enter electivesubject marks:");
+	submarks=sc.nextInt();
+	}
+	void compute()
+	{super.compute();
+	total+=submarks;
+	avg=(float)total/(n+1);
+	}
+	void display()
+	{super.display();
+	displaypracticalmarks();
+	}}
+
+public class program1 {
+
+	public static void main(String[] args) {
+		int choice;
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Enter the number of students: ");
+        int n = sc.nextInt();
+        sc.nextLine(); // Consume newline
+        
+        STUDENT[] students = new STUDENT[n];
+        
+        for (int i = 0; i < n; i++) {
+        	choice=sc.nextInt();
+        	if(choice==1) {
+            students[i] = new ScienceStudent();
+            students[i].assign();
+            students[i].compute();
+        }else{students[i] = new ArtsStudent();
+        students[i].assign();
+        students[i].compute();}}
+        
+        
+        System.out.println("\nStudent Details:");
+        for (STUDENT student : students) {
+            student.display();
+        }
+        
+        // Illustrate the use of the methods
+        System.out.println("\nInitials of Students:");
+        for (STUDENT student : students) {
+            System.out.println("Initials: " + student.extractInitials());
+        }
+        
+        System.out.println("\nNames without Whitespaces:");
+        for (STUDENT student : students) {
+            System.out.println("Name without Whitespaces: " + student.removeWhitespace());
+        }
+        
+        System.out.print("\nEnter a substring to search for in student names: ");
+        String substring = sc.nextLine();
+        System.out.println("Students containing \"" + substring + "\":");
+        for (STUDENT student : students) {
+            if (student.sname.contains(substring)) {
+                System.out.println(student.sname);
+            }
+        }
+        
+        Arrays.sort(students, (s1, s2) -> s1.sname.compareToIgnoreCase(s2.sname));
+        System.out.println("\nStudents sorted alphabetically:");
+        for (STUDENT student : students) {
+            System.out.println(student.sname);
+        }
+
+	}
+
+}
