@@ -1,0 +1,28 @@
+// Student.java
+class Student {
+    private String name;
+    private int age;
+
+    public void registerStudent(String name, int age) {
+        if (age < 18 || age > 60) {
+            throw new IllegalArgumentException("Error: Age must be between 18 and 60.");
+        }
+        this.name = name;
+        this.age = age;
+        System.out.println("Student registered successfully: " + name + ", Age: " + age);
+    }
+}
+
+// StudentAgeValidationDemo.java
+public class StudentAgeValidationDemo {
+    public static void main(String[] args) {
+        Student student = new Student();
+        
+        try {
+            student.registerStudent("Alice", 20); // Valid age
+            student.registerStudent("Bob", 65);  // Invalid age
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
