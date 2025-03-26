@@ -1,0 +1,84 @@
+question p2
+
+package edu.manipal.mit;
+
+public class DefaultAccessDemo {
+    public static void main(String[] args) {
+        Student1 student = new Student1();
+        student.name = "John Doe";
+        student.rollNumber = 12345;
+        
+        student.displayDetails();
+    }
+}
+
+package edu.manipal.mit;
+
+public class Student1 {
+    String name;
+    int rollNumber;
+
+    void displayDetails() {
+        System.out.println("Student Name: " + name);
+        System.out.println("Roll Number: " + rollNumber);
+    }
+}
+
+package edu.manipal.kmc;
+
+import edu.manipal.mit.Student1;
+
+public class TestAccess {
+    public static void main(String[] args) {
+        Student1 student = new Student1();  // Compilation error will occur here
+        student.name = "Jane Doe";        // Compilation error
+        student.rollNumber = 67890;       // Compilation error
+        student.displayDetails();         // Compilation error
+    }
+}
+
+
+question 3
+
+package edu.manipal.mit;
+
+public class Student2 {
+    private String name;
+    private int rollNumber;
+
+    // Public setter methods to set values for name and rollNumber
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRollNumber(int rollNumber) {
+        this.rollNumber = rollNumber;
+    }
+
+    // Public method to display student details
+    public void displayDetails() {
+        System.out.println("Student Name: " + name);
+        System.out.println("Roll Number: " + rollNumber);
+    }
+}
+
+
+package edu.manipal.mit;
+
+public class PrivateAccessDemo {
+    public static void main(String[] args) {
+        Student2 student = new Student2();
+
+       
+        student.setName("John Doe");
+        student.setRollNumber(12345);
+
+       
+        student.displayDetails();
+
+
+        student.name = "Jane Doe";  // Compilation error
+        student.rollNumber = 67890; // Compilation error
+    }
+}
+
