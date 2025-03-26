@@ -1,0 +1,23 @@
+// Student.java
+class Student {
+    public double calculateAverage(int totalMarks, int numberOfSubjects) {
+        if (numberOfSubjects == 0) {
+            throw new ArithmeticException("Error: Number of subjects cannot be zero.");
+        }
+        return (double) totalMarks / numberOfSubjects;
+    }
+}
+
+// MarksValidationDemo.java
+public class MarksValidationDemo {
+    public static void main(String[] args) {
+        Student student = new Student();
+        
+        try {
+            System.out.println("Average Marks: " + student.calculateAverage(450, 5)); // Valid case
+            System.out.println("Average Marks: " + student.calculateAverage(400, 0)); // Invalid case
+        } catch (ArithmeticException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
