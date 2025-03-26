@@ -1,0 +1,28 @@
+*** DefaultAccessDemo.java ***
+package edu.manipal.mit;
+import edu.manipal.mit.StudentEx1;
+
+public class DefaultAccessDemo{
+	public static void main(String[] args){
+		StudentEx1 student = new StudentEx1("Jaspreet Singh", 9);
+		student.displayDetails();
+	}
+}
+
+*** StudentEx1 ***
+
+package edu.manipal.mit;
+
+public class StudentEx1{
+	String name;
+	int rollNumber;
+	
+	StudentEx1(String name, int rollNumber){
+		this.name = name;
+		this.rollNumber = rollNumber;
+	}
+	
+	void displayDetails(){
+		System.out.println("Student Name : " + name + "\nRoll Number : " + rollNumber);
+	}
+}
