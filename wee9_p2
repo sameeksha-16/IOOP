@@ -20,3 +20,20 @@ public class StudentEx2{
 		System.out.println("Student Name : " + name + "\nRoll Number : " + rollNumber);
 	}
 }
+
+
+'''PrivateAccessDemo.java'''
+
+package edu.manipal.mit;
+import edu.manipal.mit.StudentEx2;
+
+public class PrivateAccessDemo{
+	public static void main(String[] args){
+		StudentEx2 student = new StudentEx2();
+		student.setName("Antoine Lavoisier");
+		student.setRollNumber(42);
+		student.displayDetails();
+		
+		// System.out.println("Student Name : " + student.name + "\nRoll Number : " + student.rollNumber);
+	}
+}
