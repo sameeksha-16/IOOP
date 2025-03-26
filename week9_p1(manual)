@@ -26,3 +26,16 @@ public class StudentEx1{
 		System.out.println("Student Name : " + name + "\nRoll Number : " + rollNumber);
 	}
 }
+
+
+''' DefaultAccessDemoKMC.java '''
+
+package edu.manipal.kmc;
+import edu.manipal.mit.StudentEx1;
+
+public class DefaultAccessDemoKMC{
+	public static void main(String[] args){
+		StudentEx1 student = new StudentEx1("Jaspreet Singh", 9);
+		student.displayDetails();
+	}
+}
