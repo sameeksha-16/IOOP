@@ -1,0 +1,42 @@
+// CourseFullException.java (Custom Checked Exception)
+class CourseFullException extends Exception {
+    public CourseFullException(String message) {
+        super(message);
+    }
+}
+
+// Course.java
+class Course {
+    private String courseName;
+    private int capacity;
+    private int enrolledStudents;
+
+    public Course(String courseName, int capacity) {
+        this.courseName = courseName;
+        this.capacity = capacity;
+        this.enrolledStudents = 0;
+    }
+
+    public void enrollStudent() throws CourseFullException {
+        if (enrolledStudents >= capacity) {
+            throw new CourseFullException("Error: Course " + courseName + " is full.");
+        }
+        enrolledStudents++;
+        System.out.println("Student enrolled in " + courseName + ". Total enrolled: " + enrolledStudents);
+    }
+}
+
+// CourseCapacityDemo.java
+public class CourseCapacityDemo {
+    public static void main(String[] args) {
+        Course course = new Course("Java Programming", 2);
+
+        try {
+            course.enrollStudent(); // Success
+            course.enrollStudent(); // Success
+            course.enrollStudent(); // Should throw exception
+        } catch (CourseFullException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
