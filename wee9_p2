@@ -1,4 +1,5 @@
-''' DefaultAccessDemoKMC '''
+''' DefaultAccessDemoKMC.java '''
+
 package edu.manipal.kmc;
 import edu.manipal.mit.StudentEx1;
 
@@ -6,5 +7,27 @@ public class DefaultAccessDemoKMC{
 	public static void main(String[] args){
 		StudentEx1 student = new StudentEx1("Jaspreet Singh", 9);
 		student.displayDetails();
+	}
+}
+
+
+''' StudentEx2.java '''
+
+package edu.manipal.mit;
+
+public class StudentEx2{
+	private String name;
+	private int rollNumber;
+	
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	public void setRollNumber(int rollNumber){
+		this.rollNumber = rollNumber;
+	}
+	
+	public void displayDetails(){
+		System.out.println("Student Name : " + name + "\nRoll Number : " + rollNumber);
 	}
 }
